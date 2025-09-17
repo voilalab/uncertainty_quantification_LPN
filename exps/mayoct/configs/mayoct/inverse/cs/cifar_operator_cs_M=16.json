@@ -1,0 +1,6 @@
+{
+    "operator": "cs",
+    "img_size": [32, 32],
+    "n_measurements": 16,
+    "operator_path": "exps/mayoct/results/inverse/mayoct/cs/operators/cifar_M=16.npy"
+}

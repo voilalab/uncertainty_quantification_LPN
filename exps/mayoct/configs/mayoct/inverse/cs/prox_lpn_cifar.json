@@ -1,0 +1,6 @@
+{
+    "prox": "lpn_cifar",
+    "model_path": "exps/mayoct/models_mnist/lpn/s=0.1_cifar10/model.pt",
+    "patch_size": 32,
+    "stride_size": 64
+}

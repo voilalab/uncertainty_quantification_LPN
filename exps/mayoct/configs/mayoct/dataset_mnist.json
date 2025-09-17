@@ -1,0 +1,6 @@
+{
+    "dataset": "ct_for_mnist",
+    "params": {
+        "root": "data/mayoct"
+    }
+}

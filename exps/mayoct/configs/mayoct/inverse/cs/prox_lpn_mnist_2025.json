@@ -1,0 +1,6 @@
+{
+    "prox": "lpn_mnist",
+    "model_path": "exps/mayoct/models_mnist/lpn/s=0.1_noAug_1_2025/model.pt",
+    "patch_size": 28,
+    "stride_size": 64
+}

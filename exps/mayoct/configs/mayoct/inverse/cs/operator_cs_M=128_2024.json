@@ -1,0 +1,6 @@
+{
+    "operator": "cs",
+    "img_size": [28, 28],
+    "n_measurements": 128,
+    "operator_path": "exps/mayoct/results/inverse/mayoct/cs/operators/M=128_2024.npy"
+    }
