@@ -1,5 +1,5 @@
 exps/**/models/
-exps/**/results/
+# exps/**/results/
 exps/**/experiments/
 
 pretrained/

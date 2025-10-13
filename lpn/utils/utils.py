@@ -199,7 +199,7 @@ def get_mayoct(config):
 
 def get_mnistct(config, label=False):
     """Get MMISTCT images"""
-    print(config.root, config.split, config.num_imgs)
+    # print(config.root, config.split, config.num_imgs)
     
     dataset = MNISTCTDataset(root='data/mayoct/', split=config.split)
     x_list = []

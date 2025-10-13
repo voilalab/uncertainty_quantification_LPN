@@ -1,0 +1,1 @@
+[angles=11] average performance: PSNR 11.797 +/- 0.847, SSIM 0.4384 +/- 0.1094

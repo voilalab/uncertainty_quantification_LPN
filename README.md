@@ -32,16 +32,10 @@ pip install -e .
 
 The datasets are placed in the `data/` folder.
 
-### MNIST
+### MNIST for CT
 
-The dataset is already in `data/mnist` with the following structure:
+The dataset is already in `data/mayoct/mnist` with `only0` for training in-distribution data and `idood_valid` for testing the in-distribution and out-of-distribution difference of the trained LPN
 
-```
-data/
-└── mnist
-    ├── labels.npy
-    └── mnist.npy
-```
 
 ---
 
@@ -50,20 +44,22 @@ data/
 Code of the main functionalities of LPN is placed in the `lpn` folder.  
 Code for reproducing the MNIST experiments is placed in the `exps/mnist` folder.
 
-### MNIST Experiment
+### MNIST for CT Experiment
 
 1. **Train and Compute prior:**
 
 ```bash
 bash run.sh
+bash run_ct.sh
+
 ```
 
-- Model will be saved at `exps/mnist/experiments/mnist/model.pt`.
-- Results will be saved in `exps/mnist/experiments/mnist/prior`.
+- Model will be saved in `exps/mayoct/models_mnist/lpn`.
+- Results will be saved in `exps/mayoct/models_mnist`.
 
 2. **Visualize results**
 
-- Evaluation and visualization available at `exps/mayoct/results/inverse/mayoct/tomo/evaluate_ct.ipynb`
+- Evaluation and visualization available at `evaluate_ct.ipynb`. All pre-trained model and results are provided in this repository so you can run this code directly
 
 ---
 

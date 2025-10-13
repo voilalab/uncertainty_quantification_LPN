@@ -26,9 +26,6 @@ def parse_args():
         default='exps/mayoct/models_mnist/prior',
         help="output directory. If None, save to {model directory}/prior.",
     )
-    # parser.add_argument(
-    #     "--perturb_config_path", type=str, default='../exps/mnist/configs/mnist/prior/perturb/${perturb}.json', help="perturb config"
-    # )
     parser.add_argument(
         "--perturb_config_path", type=str, default='exps/mnist/configs/mnist/prior/perturb/gaussian.json', help="perturb config"
     )
@@ -49,7 +46,6 @@ def parse_args():
     args.model_config = load_config(args.model_config_path)
     args.perturb_config = load_config(args.perturb_config_path)
     args.dataset_config = load_config(args.dataset_config_path)
-    # print(args.dataset_config)
     # pretty print args
     print(args.out_dir)
     return args
@@ -104,11 +100,6 @@ def main(args):
         p = res["p"]
         y = res["y"]
         fy = res["fy"]
-
-        # print("x", x.shape)
-        # print("y", y.shape)
-        # print("p", p.shape)
-        # print(p)
         p_array = p
         x_array = x.reshape(len(imgs), ndim)
         y_array = y.reshape(len(imgs), ndim)
