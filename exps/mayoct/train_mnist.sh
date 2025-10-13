@@ -1,7 +1,7 @@
 #!/bin/bash
 
 for NOISE in 0.1; do
-    for seeds in 1234; do
+    for seeds in 7890; do
         python lpn/train.py \
         --exp_dir exps/mayoct/models_mnist/lpn/s=${NOISE}_noAug_1_${seeds} \
         --dataset_config_path exps/mayoct/configs/mayoct/dataset_mnist.json \

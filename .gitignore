@@ -1,7 +1,7 @@
 exps/**/models/
 exps/**/results/
 exps/**/experiments/
-exps/**/lpn/
+
 pretrained/
 data/celeba/
 .DS_Store

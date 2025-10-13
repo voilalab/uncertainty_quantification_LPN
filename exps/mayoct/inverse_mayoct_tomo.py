@@ -113,7 +113,7 @@ def make_args_for_run(exp_data: str, img_size: int, num_angles: int, det_shape: 
         {
             "dataset": "ct_for_mnist",
             "root": "data/mayoct/",
-            "split": "idood_valid_",
+            "split": "idood_valid",
             "squeeze": True,
             "start_idx": 0,
             "num_imgs": 100,

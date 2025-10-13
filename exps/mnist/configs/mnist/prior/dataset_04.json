@@ -1,6 +1,6 @@
 {
     "dataset": "ct_for_mnist",
-    "split": "idood_valid_",
+    "split": "idood_valid",
     "squeeze": false,
     "start_idx": 0,
     "num_imgs": 100
