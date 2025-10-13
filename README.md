@@ -7,7 +7,7 @@ We adapt their Learned Proximal Network (LPN) framework to investigate **distrib
 Our experiments focus specifically on **MNIST-based sparse-view CT reconstruction**.
 
 👉 This repository is an extension of their work; please see the original repo for the full method and additional experiments.  
-👉 Detailed documentation of our extensions will be updated soon.
+👉 **All pre-trained models and results are provided in this repository, so the `evaluate_ct.ipynb` notebook file can be executed directly without retraining.**
 
 ---
 
@@ -34,7 +34,8 @@ The datasets are placed in the `data/` folder.
 
 ### MNIST for CT
 
-The dataset is already in `data/mayoct/mnist` with `only0` for training in-distribution data and `idood_valid` for testing the in-distribution and out-of-distribution difference of the trained LPN
+The dataset is located in `data/mayoct/mnist`.
+The `only0` subset is used for in-distribution training, while `idood_valid` is used for evaluating distribution-shift performance (in- vs out-of-distribution).
 
 
 ---
@@ -42,24 +43,25 @@ The dataset is already in `data/mayoct/mnist` with `only0` for training in-distr
 ## How to Run the Code
 
 Code of the main functionalities of LPN is placed in the `lpn` folder.  
-Code for reproducing the MNIST experiments is placed in the `exps/mnist` folder.
+Code for reproducing the MNIST experiments is placed in the `exps/mayoct` folder.
 
 ### MNIST for CT Experiment
 
 1. **Train and Compute prior:**
 
 ```bash
-bash run.sh
-bash run_ct.sh
-
+bash run.sh      # trains the Learned Proximal Network (LPN)
+bash run_ct.sh   # performs CT reconstruction using the trained prior
 ```
 
-- Model will be saved in `exps/mayoct/models_mnist/lpn`.
-- Results will be saved in `exps/mayoct/models_mnist`.
+- Trained model: `exps/mayoct/models_mnist/lpn`
+- Training logs: `exps/mayoct/models_mnist`
+- CT results: `exps/mayoct/results/inverse/mayoct/tomo`
 
 2. **Visualize results**
 
-- Evaluation and visualization available at `evaluate_ct.ipynb`. All pre-trained model and results are provided in this repository so you can run this code directly
+- Evaluation and visualization available at `evaluate_ct.ipynb`. **All pre-trained models and results are provided in this repository, so the notebook can be executed directly without retraining.**
+
 
 ---
 
