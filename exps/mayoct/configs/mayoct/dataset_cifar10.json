@@ -1,6 +1,0 @@
-{
-    "dataset": "cifar10",
-    "params": {
-        "root": "data/"
-    }
-}

@@ -1,0 +1,7 @@
+{
+    "dataset": "ct_for_mnist",
+    "split": "idood_valid_",
+    "squeeze": false,
+    "start_idx": 0,
+    "num_imgs": 100
+}

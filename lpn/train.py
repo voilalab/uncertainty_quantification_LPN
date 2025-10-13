@@ -176,22 +176,8 @@ def main(args):
 
     # tensorboard
     writer = SummaryWriter(log_dir=f"{args.exp_dir}/tb")
-
-    # Get the dataset
-    # if args.dataset_config == 'cifar10':
-    #     train_dataset = datasets.CIFAR10(root="../data/cifar-10-batches-py",
-    #                              train=True,
-    #                              download=True,
-    #                              transform=transforms.ToTensor())
-    #     train_dataloader = torch.utils.data.DataLoader(
-    #         train_dataset,
-    #         batch_size=args.train_batch_size,
-    #         shuffle=True,
-    #         num_workers=args.dataloader_num_workers,
-    #     )
-    # else:
-    train_dataset = load_dataset(args.dataset_config, "train")
-    # print(train_dataset)
+    train_dataset = load_dataset(args.dataset_config, "only0")
+    print('train_dataset', args.dataset_config, train_dataset)
     # Get the dataloader
     train_dataloader = torch.utils.data.DataLoader(
         train_dataset,

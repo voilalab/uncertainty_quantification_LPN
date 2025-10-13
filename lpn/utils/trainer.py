@@ -30,18 +30,6 @@ class Validator:
             psnr_, ssim_ = self.compute_metrics(clean_images, out)
             psnr_list.extend(psnr_)
             ssim_list.extend(ssim_)
-            # print(clean_images.shape)
-        
-        plt.figure(figsize=(10,5))
-        plt.subplot(1,2,1)
-        plt.imshow(clean_images.squeeze().detach().cpu().numpy())
-        plt.title('in')
-        plt.subplot(1,2,2)
-        plt.imshow(out.squeeze().detach().cpu().numpy())
-        plt.title('out')
-        plt.tight_layout()
-        plt.savefig(f'exps/mayoct/models_mnist/temp/temp/{step}.png')
-        plt.close()
 
         print(f"PSNR: {np.mean(psnr_list)}")
         print(f"SSIM: {np.mean(ssim_list)}")

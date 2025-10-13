@@ -1,9 +1,9 @@
 exps/**/models/
 exps/**/results/
 exps/**/experiments/
+exps/**/lpn/
 pretrained/
 data/celeba/
-data/mayoct/
 .DS_Store
 
 # Byte-compiled / optimized / DLL files

@@ -34,7 +34,7 @@ class MNISTCTDataset(Dataset):
         )
         print(self.data_dir)
         self.files = sorted(os.listdir(self.data_dir))
-        
+        # print(self.files[:100])
         self.transform = None#TRANSFORM
         self.dataset = [{"fn": fn} for fn in self.files]
 
@@ -44,12 +44,7 @@ class MNISTCTDataset(Dataset):
     def __getitem__(self, idx):
         img_name = os.path.join(self.data_dir, self.dataset[idx]["fn"])
         label = self.dataset[idx]["fn"][-5]
-        # print(label)
         image = np.load(img_name)
-        # plt.figure()
-        # plt.imshow(image)
-        # plt.savefig('/home/namhoon/learned-proximal-networks/exps/mayoct/models_mnist/temp/'+self.dataset[idx]["fn"][:-3]+'png')
-        # plt.close()
         image = image.astype(np.float32)
         image = torch.from_numpy(image)
         image = image.unsqueeze(0)
@@ -61,3 +56,8 @@ class MNISTCTDataset(Dataset):
 
 
 LPNDataset = MNISTCTDataset
+
+if __name__ == '__main__':
+
+    dataset = MNISTCTDataset('/home/namhoon/datasets2/uncertainty_quantification_LPN/data/mayoct', 'ood')
+    print(np.load('/home/namhoon/datasets2/uncertainty_quantification_LPN/data/mnist/labels.npy'))

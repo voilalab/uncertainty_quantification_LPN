@@ -1,7 +1,0 @@
-{
-    "dataset": "cifar10",
-    "split": "idood_valid",
-    "squeeze": false,
-    "start_idx": 0,
-    "num_imgs": 100
-}

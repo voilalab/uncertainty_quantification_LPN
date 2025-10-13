@@ -1,9 +1,0 @@
-{
-    "model": "lpn_cifar",
-    "params": {
-        "in_dim": 1,
-        "hidden": 64, 
-        "beta": 10, 
-        "alpha": 0.01
-    }
-}

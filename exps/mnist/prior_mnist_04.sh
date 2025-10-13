@@ -1,8 +1,6 @@
-
-# for perturb in convex blur gaussian; do
 for perturb in gaussian; do
-    for seed in 1234 5678 7890 2024 2025 6092 7220 7478 3508 7879; do
-        echo idood
+    for seed in 1234; do #1234 5678 7890 2024 2025 6092 7220 7478 3508 7879
+        # echo idood
         python lpn/evaluate_prior_idood.py \
         --model_config_path exps/mnist/configs/mnist/model.json \
         --out_dir exps/mayoct/models_mnist/prior_idood_noAug_1_${seed} \
