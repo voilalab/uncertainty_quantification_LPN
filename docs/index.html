@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Distribution-Shift Uncertainty for Inverse Problems</title>
+    <meta name="description" content="A calibration-free, instance-level uncertainty indicator for detecting distribution shift in computational imaging inverse problems.">
+    <meta name="theme-color" content="#c0995e">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Towards Distribution-Shift Uncertainty Estimation for Inverse Problems">
+    <meta property="og:description" content="Use reconstruction stability across measurement subsets as a lightweight guardrail for generative priors.">
+    <meta property="og:image" content="https://voilalab.github.io/uncertainty_quantification_LPN/static/images/mnist-shift.png">
+    <meta property="og:url" content="https://voilalab.github.io/uncertainty_quantification_LPN/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="icon" href="static/images/voila.ico" sizes="64x64">
+    <link rel="stylesheet" href="static/css/site.css">
+    <script src="static/js/site.js" defer></script>
+  </head>
+  <body class="theme-violet">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <nav class="site-nav" aria-label="VOILA Lab navigation">
+      <div class="nav-inner">
+        <a class="brand" href="https://voilalab.github.io/" aria-label="VOILA Lab home"><img src="static/images/voila.ico" alt="" width="30" height="30"><strong>VOILA Lab @ GT</strong></a>
+        <div class="nav-links">
+          <a href="https://voilalab.github.io/">Home</a><a href="https://voilalab.github.io/team">Team</a><a href="https://voilalab.github.io/research">Research</a><a href="https://voilalab.github.io/papers">Papers</a><a class="nav-active" href="#top" aria-current="page">Shift UQ</a>
+        </div>
+      </div>
+    </nav>
+
+    <main id="main-content">
+      <header class="hero" id="top">
+        <div class="container hero-card">
+          <p class="eyebrow">VOILA Lab @ GT <span>/</span> arXiv 2025</p>
+          <h1>Towards <span>Distribution-Shift Uncertainty</span><br>for Inverse Problems</h1>
+          <p class="hero-subtitle">A calibration-free, instance-level warning signal for when a generative prior is operating outside its training distribution.</p>
+          <div class="authors"><a href="https://voilalab.github.io/team">Namhoon Kim</a><a href="https://voilalab.github.io/team">Sara Fridovich-Keil</a></div>
+          <p class="affiliation">Georgia Institute of Technology · VOILA Lab</p>
+          <div class="hero-actions"><a class="button button-primary" href="https://arxiv.org/pdf/2510.10947" target="_blank" rel="noreferrer">Paper PDF ↗</a><a class="button" href="https://arxiv.org/abs/2510.10947" target="_blank" rel="noreferrer">arXiv ↗</a><a class="button" href="https://github.com/voilalab/uncertainty_quantification_LPN" target="_blank" rel="noreferrer">Code ↗</a></div>
+        </div>
+        <figure class="container teaser-card shift-teaser">
+          <img src="static/images/mnist-shift.png" alt="MNIST digit zero shown as in distribution and digits one through nine shown as out of distribution" width="3278" height="514">
+          <figcaption><strong>Controlled distribution shift.</strong> A learned proximal network is trained only on digit “0”, then used for sparse-view CT reconstruction of all ten digits.</figcaption>
+        </figure>
+      </header>
+
+      <section class="stat-strip"><div class="container stats"><div><strong>0</strong><span>only in-distribution class</span></div><div><strong>1–9</strong><span>out-of-distribution classes</span></div><div><strong>11 / 22 / 33</strong><span>CT projection views</span></div><div><strong>10×</strong><span>random measurement repeats</span></div></div></section>
+
+      <section class="section" id="idea"><div class="container"><div class="section-heading"><p class="section-kicker">Core idea</p><h2>Turn measurement diversity into an uncertainty signal.</h2><p>Instead of requiring a separate calibration dataset, reuse the measurements already available for the same object.</p></div>
+        <div class="flow" role="group" aria-label="Method overview">
+          <article><span>01</span><h3>Subsample</h3><p>Draw several random subsets of the available physical measurements.</p></article><div class="flow-arrow">→</div>
+          <article><span>02</span><h3>Reconstruct</h3><p>Apply the same pretrained generative prior to every subset.</p></article><div class="flow-arrow">→</div>
+          <article><span>03</span><h3>Compare</h3><p>Measure pixel-wise variation across the resulting reconstructions.</p></article><div class="flow-arrow">→</div>
+          <article class="flow-warning"><span>04</span><h3>Warn</h3><p>High instability flags likely distribution shift and hallucination risk.</p></article>
+        </div>
+      </div></section>
+
+      <section class="section section-muted" id="abstract"><div class="container"><div class="section-heading"><p class="section-kicker">Motivation</p><h2>Strong priors need lightweight guardrails.</h2></div><div class="two-column"><article class="prose-card"><p>Generative priors can reconstruct useful images from dramatically fewer measurements, but their learned assumptions may fail silently when a new patient, scanner, or pathology differs from the training distribution.</p><p>We hypothesize that in-distribution targets remain stable when reconstructed from different random measurement subsets, while out-of-distribution targets vary more. That variation becomes an efficient, retraining-free uncertainty indicator for a single imaging instance.</p></article><aside class="takeaway-card"><p class="mini-label">Deployment rule</p><blockquote>When reconstructions disagree, acquire more measurements or switch to a more conservative reconstruction method.</blockquote></aside></div></div></section>
+
+      <section class="section" id="experiment"><div class="container"><div class="section-heading"><p class="section-kicker">Experiment</p><h2>A sparse-view CT stress test.</h2></div><div class="card-grid four">
+        <article><span class="card-index">Prior</span><h3>Learned Proximal Network</h3><p>An input-convex learned proximal operator supplies the data-driven image prior.</p></article>
+        <article><span class="card-index">Train</span><h3>MNIST “0” only</h3><p>The prior never sees the remaining nine digit classes during training.</p></article>
+        <article><span class="card-index">Measure</span><h3>Fan-beam sparse CT</h3><p>Reconstruction is tested at 11, 22, and 33 projection-angle budgets.</p></article>
+        <article><span class="card-index">Evaluate</span><h3>100 targets × 10 seeds</h3><p>PSNR, SSIM, and reconstruction variance are compared per digit.</p></article>
+      </div></div></section>
+
+      <section class="section section-muted" id="results"><div class="container-wide"><div class="section-heading narrow"><p class="section-kicker">Visual evidence</p><h2>OOD reconstructions move more when measurements change.</h2></div><div class="results-shell">
+        <div class="tabs" role="tablist" aria-label="Result figures"><button type="button" role="tab" aria-selected="true" aria-controls="result-mean" data-tab="result-mean">Mean reconstructions</button><button type="button" role="tab" aria-selected="false" aria-controls="result-variance" data-tab="result-variance">Uncertainty maps</button><button type="button" role="tab" aria-selected="false" aria-controls="result-quality" data-tab="result-quality">Reconstruction quality</button></div>
+        <figure class="result-panel" id="result-mean" role="tabpanel"><img src="static/images/mean-reconstructions.png" alt="Mean sparse-view CT reconstructions for MNIST digits at three projection budgets"><figcaption>The in-distribution zero remains recognizable and consistent even at 11 views; OOD digits are pulled more strongly toward the learned prior.</figcaption></figure>
+        <figure class="result-panel" id="result-variance" role="tabpanel" hidden><img src="static/images/uncertainty-maps.png" alt="Pixel-wise standard deviation maps across reconstruction seeds"><figcaption>Pixel-wise variance is consistently darker for digit zero and brighter for OOD digits, especially in the most undersampled 11-view setting.</figcaption></figure>
+        <figure class="result-panel" id="result-quality" role="tabpanel" hidden><img src="static/images/reconstruction-metrics.png" alt="PSNR and SSIM curves for LPN and filtered back projection by digit and CT view count"><figcaption>The learned prior improves reconstruction quality over filtered back projection, but its advantage is largest for the in-distribution class.</figcaption></figure>
+      </div></div></section>
+
+      <section class="section" id="finding"><div class="container"><div class="section-heading"><p class="section-kicker">Key result</p><h2>Instability tracks distribution shift.</h2></div><div class="evidence-grid"><div class="evidence-copy"><p class="lead">Average reconstruction standard deviation is lowest for the in-distribution digit “0” across all measurement budgets.</p><p>The gap is strongest with only 11 projection views—the regime where the learned prior has the greatest influence and distribution mismatch creates the most risk.</p><div class="signal-chip">High cross-measurement variation → likely OOD</div></div><figure class="plot-card"><img src="static/images/uncertainty-curve.png" alt="Mean standard deviation by digit for 11, 22, and 33 CT views"><figcaption>Instance-level uncertainty from reconstruction variation.</figcaption></figure></div></div></section>
+
+      <section class="section section-muted"><div class="container"><div class="section-heading"><p class="section-kicker">Scope</p><h2>A promising guardrail, with honest limits.</h2></div><div class="finding-grid"><article class="finding strong"><p class="mini-label">Advantages</p><h3>No calibration set and no retraining.</h3><p>The indicator wraps around an existing reconstruction prior and uses only repeated measurement subsets.</p></article><article class="finding"><p class="mini-label">Initial evidence</p><h3>Clear behavior in a controlled CT setting.</h3><p>MNIST makes training distribution and OOD classes explicit, revealing the mechanism cleanly.</p></article><article class="finding"><p class="mini-label">Next step</p><h3>Validate on clinically realistic shifts.</h3><p>Future work should test diverse modalities, pathologies, priors, and statistically calibrated thresholds.</p></article></div></div></section>
+
+      <section class="section citation" id="citation"><div class="container"><div class="section-heading"><p class="section-kicker">Citation</p><h2>If this work is useful, please cite it.</h2></div><div class="bib-card"><div class="bib-toolbar"><span>BibTeX</span><button type="button" data-copy-bib>Copy</button><span class="copy-status" aria-live="polite"></span></div><pre><code id="bibtex">@misc{kim2025distributionshift,
+  title         = {Towards Distribution-Shift Uncertainty Estimation
+                   for Inverse Problems with Generative Priors},
+  author        = {Kim, Namhoon and Fridovich-Keil, Sara},
+  year          = {2025},
+  eprint        = {2510.10947},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV}
+}</code></pre></div></div></section>
+    </main>
+
+    <footer class="site-footer"><div class="container footer-grid"><div><h2>VOILA Lab @ GT</h2><a href="https://voilalab.github.io/research">Research</a><br><a href="https://voilalab.github.io/papers">Publications</a><br><a href="https://voilalab.github.io/team">People</a></div><div><h2>Project</h2><a href="https://arxiv.org/abs/2510.10947">Paper</a><br><a href="https://github.com/voilalab/uncertainty_quantification_LPN">Code</a><br><a href="#top">Back to top</a></div></div><p class="footer-note">Distribution-Shift Uncertainty · 2025 · Georgia Tech</p></footer>
+  </body>
+</html>
